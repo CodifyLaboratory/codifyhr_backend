@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Resume
+from .models import Resume, Wishlist
 
 
 class ResumeSerializer(serializers.ModelSerializer):
@@ -12,7 +12,39 @@ class ResumeSerializer(serializers.ModelSerializer):
                   'surname',
                   'image',
                   'comment',
-                  'link',
+                  'phone_number',
+                  'email',
+                  'file',
                   'category',
                   ]
+
+
+class WishlistSerializer(serializers.ModelSerializer):
+
+    wished_resume = ResumeSerializer()
+
+    class Meta:
+        model = Wishlist
+        fields = ['id', 'user', 'wished_resume']
+
+
+class WishlistCreateSerializer(serializers.ModelSerializer):
+
+    wished_resume = serializers.PrimaryKeyRelatedField(read_only=True)
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = Wishlist
+        fields = ['id', 'user', 'wished_resume']
+
+
+class WishlistDetailSerializer(serializers.ModelSerializer):
+
+    wished_resume = ResumeSerializer()
+
+    class Meta:
+        model = Wishlist
+        fields = ['id', 'user', 'wished_resume']
+
+
 

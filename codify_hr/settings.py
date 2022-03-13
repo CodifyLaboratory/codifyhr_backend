@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'resumes_app',
     'auth_app',
     'categories_app',
-    'profile_app',
     'corsheaders',
 ]
 

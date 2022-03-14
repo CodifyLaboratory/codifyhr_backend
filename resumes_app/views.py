@@ -22,8 +22,6 @@ class ResumeReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
 
 class WishlistModelViewSet(ModelViewSet):
     """ Закладки """
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         try:
@@ -34,7 +32,7 @@ class WishlistModelViewSet(ModelViewSet):
 
     def get_queryset(self):
         if self.action == 'list' or self.action == 'retrieve':
-            return Wishlist.objects.filter(user=self.request.user)
+            return Wishlist.objects.filter(user_id=self.request.user.id)
         elif self.action == 'post' or self.action == 'destroy':
             return Wishlist.objects.all()
 

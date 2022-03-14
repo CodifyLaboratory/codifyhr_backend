@@ -24,7 +24,6 @@ class WishlistSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)
     wished_resume = ResumeSerializer()
 
-
     class Meta:
         model = Wishlist
         fields = ['id', 'user', 'wished_resume']
@@ -41,9 +40,8 @@ class WishlistCreateSerializer(serializers.ModelSerializer):
 
 
 class WishlistDetailSerializer(serializers.ModelSerializer):
-
-    wished_resume = ResumeSerializer()
     user = serializers.PrimaryKeyRelatedField(read_only=True)
+    wished_resume = ResumeSerializer()
 
     class Meta:
         model = Wishlist

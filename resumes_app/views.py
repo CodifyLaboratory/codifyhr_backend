@@ -1,6 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
-from rest_framework.authentication import TokenAuthentication
+from rest_framework.authentication import TokenAuthentication, BasicAuthentication, SessionAuthentication
 from rest_framework.exceptions import NotFound, AuthenticationFailed
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
@@ -10,7 +10,7 @@ from .serializers import ResumeSerializer, WishlistDetailSerializer, WishlistSer
 
 
 class ResumeReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     serializer_class = ResumeSerializer
@@ -22,7 +22,7 @@ class ResumeReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
 
 class WishlistModelViewSet(ModelViewSet):
     """ Закладки """
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -34,7 +34,7 @@ class WishlistModelViewSet(ModelViewSet):
 
     def get_queryset(self):
         if self.action == 'list' or self.action == 'retrieve':
-            return Wishlist.objects.filter(user_id=self.request.user_id)
+            return Wishlist.objects.filter(user_id=self.request.user.id)
         elif self.action == 'post' or self.action == 'destroy':
             return Wishlist.objects.all()
 

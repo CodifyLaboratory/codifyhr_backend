@@ -8,8 +8,8 @@ class UserSerializer(serializers.Serializer):
     username = serializers.CharField(
         required=True,
         validators=[validators.UniqueValidator(queryset=User.objects.all())])
-    password = serializers.CharField(required=True, min_length=6, write_only=True)
-    confirm_password = serializers.CharField(required=True, min_length=6, write_only=True)
+    password = serializers.CharField(required=True, min_length=8, write_only=True)
+    confirm_password = serializers.CharField(required=True, min_length=8, write_only=True)
 
     def validate(self, attrs):
         attrs = super().validate(attrs)

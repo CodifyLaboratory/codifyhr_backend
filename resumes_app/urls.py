@@ -1,15 +1,12 @@
-from .views import ResumeReadOnlyModelViewSet, WishlistModelViewSet
-from rest_framework.routers import DefaultRouter
+from .views import *
 from django.urls import path
-from rest_framework.authtoken import views
 
-router = DefaultRouter()
-router.register(r"resumes", ResumeReadOnlyModelViewSet, basename='resumes')
-urlpatterns = router.urls
-
-
-urlpatterns += [
+urlpatterns = [
+    path('partners/', PartnerViewSet.as_view({'get': 'list'})),
+    path('categories/', CategoriesViewSet.as_view({'get': 'list'})),
     path('wishlist/', WishlistModelViewSet.as_view({'get': 'list'})),
+    path('resumes/', ResumeReadOnlyModelViewSet.as_view({'get': 'list'})),
+    path('resumes/<int:pk>/', ResumeReadOnlyModelViewSet.as_view({'get': 'retrieve'})),
     path('wishlist/<int:pk>/', WishlistModelViewSet.as_view({'get': 'retrieve'})),
     path('wishlist/create/<int:pk>/', WishlistModelViewSet.as_view({'post': 'create'})),
     path('wishlist/delete/<int:pk>/', WishlistModelViewSet.as_view({'delete': 'destroy'}))

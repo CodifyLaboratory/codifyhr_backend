@@ -46,10 +46,8 @@ INSTALLED_APPS = [
     'rest_framework.authentication',
     'rest_framework.authtoken',
     'django_filters',
-    'main_app',
     'resumes_app',
     'auth_app',
-    'categories_app',
     'corsheaders',
 ]
 

@@ -1,8 +1,35 @@
 from rest_framework import serializers
-from .models import Resume, Wishlist
+from .models import *
+
+
+class CategorySerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = ["id", "name"]
+
+    def validate(self, data):
+        data = super().validate(data)
+        name = data['name']
+        if not name:
+            raise serializers.ValidationError('This field required')
+
+        for instance in Category.objects.all():
+            if instance.name == name:
+                raise serializers.ValidationError(detail="Такая категория уже существует", code="Категория создана")
+
+        return data
+
+
+class ReturnNameSrializer(serializers.RelatedField):
+
+    def to_representation(self, value):
+        return value.name
 
 
 class ResumeSerializer(serializers.ModelSerializer):
+
+    category = ReturnNameSrializer(many=True, read_only=True)
 
     class Meta:
         model = Resume
@@ -17,6 +44,12 @@ class ResumeSerializer(serializers.ModelSerializer):
                   'file',
                   'category',
                   ]
+
+
+class PartnersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Partners
+        fields = ['id', 'title', 'link','image']
 
 
 class WishlistSerializer(serializers.ModelSerializer):
@@ -46,5 +79,3 @@ class WishlistDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Wishlist
         fields = ['id', 'user', 'wished_resume']
-
-

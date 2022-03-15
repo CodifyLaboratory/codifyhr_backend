@@ -11,7 +11,7 @@ class Resume(models.Model):
     phone_number = models.CharField(max_length=14, null=True, blank=True)
     email = models.EmailField(max_length=255, null=True, blank=True)
     file = models.FileField(null=True, blank=True, upload_to="media/files")
-    category = models.ManyToManyField('categories_app.Category')
+    category = models.ManyToManyField('Category')
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.surname}"
@@ -24,3 +24,18 @@ class Wishlist(models.Model):
     def __str__(self):
         return f"{self.user} {self.wished_resume}"
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+class Partners(models.Model):
+    title = models.CharField(max_length=255)
+    link = models.CharField(max_length=255)
+    image = models.ImageField(null=True, blank=True, upload_to="images/partners")
+
+    def __str__(self):
+        return f"{self.title}"

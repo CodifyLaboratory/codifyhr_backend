@@ -1,12 +1,14 @@
+from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication, BasicAuthentication, SessionAuthentication
 from rest_framework.exceptions import NotFound, AuthenticationFailed
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from .models import Resume, Wishlist
-from .serializers import ResumeSerializer, WishlistDetailSerializer, WishlistSerializer, WishlistCreateSerializer
+from .models import *
+from .serializers import *
 
 
 class ResumeReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
@@ -50,3 +52,20 @@ class WishlistModelViewSet(ModelViewSet):
                 return WishlistSerializer
         except:
             raise AuthenticationFailed
+
+
+class CategoriesViewSet(viewsets.ViewSet):
+
+    def list(self, request):
+        queryset = Category.objects.all()
+        serializer = CategorySerializers(queryset, many=True)
+        return Response(serializer.data)
+
+
+class PartnerViewSet(viewsets.ViewSet):
+
+    def list(self, request):
+        queryset = Partners.objects.all()
+        serializer = PartnersSerializer(queryset, many=True)
+        return Response(serializer.data)
+

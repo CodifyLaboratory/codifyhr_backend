@@ -6,11 +6,11 @@ class Resume(models.Model):
     first_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255, blank=True, null=True)
     surname = models.CharField(max_length=255, blank=True, null=True)
-    image = models.ImageField(null=True, blank=True, upload_to="media/resumes_image")
+    image = models.ImageField(null=True, blank=True, upload_to="resumes_images")
     comment = models.CharField(max_length=255, null=True, blank=True)
     phone_number = models.CharField(max_length=14, null=True, blank=True)
     email = models.EmailField(max_length=255, null=True, blank=True)
-    file = models.FileField(null=True, blank=True, upload_to="media/files")
+    file = models.FileField(null=True, blank=True, upload_to="pdf_files")
     category = models.ManyToManyField('Category')
 
     def __str__(self):
@@ -35,7 +35,7 @@ class Category(models.Model):
 class Partners(models.Model):
     title = models.CharField(max_length=255)
     link = models.CharField(max_length=255)
-    image = models.ImageField(null=True, blank=True, upload_to="images/partners")
+    image = models.ImageField(null=True, blank=True, upload_to="partners")
 
     def __str__(self):
         return f"{self.title}"

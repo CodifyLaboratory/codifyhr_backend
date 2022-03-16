@@ -21,7 +21,7 @@ class CategorySerializers(serializers.ModelSerializer):
         return data
 
 
-class ReturnNameSrializer(serializers.RelatedField):
+class ReturnNameSerializer(serializers.RelatedField):
 
     def to_representation(self, value):
         return value.name
@@ -29,7 +29,7 @@ class ReturnNameSrializer(serializers.RelatedField):
 
 class ResumeSerializer(serializers.ModelSerializer):
 
-    category = ReturnNameSrializer(many=True, read_only=True)
+    category = ReturnNameSerializer(many=True, read_only=True)
 
     class Meta:
         model = Resume

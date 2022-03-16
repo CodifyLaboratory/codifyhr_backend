@@ -36,6 +36,7 @@ REST_FRAMEWORK = {
 }
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -94,7 +95,7 @@ WSGI_APPLICATION = 'codify_hr.wsgi.application'
 #         'USER': env('DB_USER'),
 #         'PASSWORD': env('DB_PASSWORD'),
 #         'HOST': env('DB_HOST'),
-#         'PORT': пшеenv('DB_PORT'),
+#         'PORT': env('DB_PORT'),
 #     }
 # }
 

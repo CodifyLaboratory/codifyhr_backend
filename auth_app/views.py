@@ -1,12 +1,10 @@
-from rest_framework import views, response, status, viewsets
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
-from rest_framework.authtoken.admin import User
 from django.shortcuts import get_object_or_404
-from .serializers import UserSerializer, UserDetailSerializer
+from rest_framework import views, response, status, viewsets
+from rest_framework.authtoken.admin import User
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
 
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from .serializers import UserSerializer, UserDetailSerializer
 
 
 class UserRegisterAPIViews(views.APIView):
@@ -22,8 +20,8 @@ class UserRegisterAPIViews(views.APIView):
 
 class PersonalRoomViewSet(viewsets.ViewSet):
 
-    def retrieve(self, request, pk=None):
-        queryset = User.objects.filter(pk=self.request.user.id)
-        user = get_object_or_404(queryset, pk=pk)
+    def retrieve(self, request):
+        queryset = User.objects.filter(id=self.request.user.id)
+        user = get_object_or_404(queryset, id=self.request.user.id)
         serializer = UserDetailSerializer(user)
         return Response(serializer.data)

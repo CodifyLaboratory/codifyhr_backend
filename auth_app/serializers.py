@@ -32,3 +32,11 @@ class UserSerializer(serializers.Serializer):
         token = Token.objects.filter(user_id=instance.id).first()
         response['token'] = token.key
         return response
+
+
+class UserDetailSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    username = serializers.CharField(read_only=True)
+    first_name = serializers.CharField(read_only=True)
+    last_name = serializers.CharField(read_only=True)
+    email = serializers.EmailField(read_only=True)

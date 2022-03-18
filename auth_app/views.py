@@ -24,7 +24,7 @@ class PersonalRoomViewSet(viewsets.ViewSet):
     authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def retrieve(self, request):
+    def retrieve(self, request, pk=None):
         queryset = User.objects.filter(id=self.request.user.id)
         user = get_object_or_404(queryset, id=self.request.user.id)
         serializer = UserDetailSerializer(user)

@@ -4,6 +4,7 @@ from .views import *
 
 
 urlpatterns  = [
-    path('user/', PersonalRoomViewSet.as_view({'get': 'retrieve'})),
     path('login/', obtain_auth_token, name='user-obtain_auth_token'),
+    path('user/', PersonalRoomViewSet.as_view({'get': 'retrieve'})),
+    path('users/', PersonalRoomViewSet.as_view({'get': 'list'})),
 ]

@@ -23,7 +23,6 @@ class ResumeReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class WishlistModelViewSet(ModelViewSet):
-    """ Закладки """
     authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticated]
 

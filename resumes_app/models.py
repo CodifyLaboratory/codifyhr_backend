@@ -6,7 +6,6 @@ class Resume(models.Model):
     first_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255, blank=True, null=True)
     surname = models.CharField(max_length=255, blank=True, null=True)
-    image = models.ImageField(null=True, blank=True, upload_to="images/resumes_images")
     comment = models.CharField(max_length=255, null=True, blank=True)
     phone_number = models.CharField(max_length=14, null=True, blank=True)
     email = models.EmailField(max_length=255, null=True, blank=True)

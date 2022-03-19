@@ -15,10 +15,17 @@ class Resume(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.surname}"
 
+    class Meta:
+        verbose_name = 'Резюме'
+        verbose_name_plural = 'Резюме'
 
 class Wishlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     wished_resume = models.ForeignKey(Resume, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Закладки'
+        verbose_name_plural = 'Закладки'
 
     def __str__(self):
         return f"{self.user} {self.wished_resume}"
@@ -30,6 +37,10 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    class Meta:
+        verbose_name = 'Категории'
+        verbose_name_plural = 'Категории'
+
 
 class Partners(models.Model):
     title = models.CharField(max_length=255)
@@ -38,3 +49,7 @@ class Partners(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+    class Meta:
+        verbose_name = 'Партнеры'
+        verbose_name_plural = 'Партнеры'

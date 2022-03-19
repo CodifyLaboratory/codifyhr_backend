@@ -11,8 +11,7 @@ schema_view = get_schema_view(
       title="CodifyHR API",
       default_version='v1',
       description="special for frontend ^^",
-      terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="contact@xyz.local"),
+      contact=openapi.Contact(email="maxlestor2@gmail.com"),
       license=openapi.License(name="BSD License"),
    ),
    public=True,
@@ -22,6 +21,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth/', include("rest_framework.urls")),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('', include('resumes_app.urls')),
     path('', include('auth_app.urls')),
@@ -29,4 +29,3 @@ urlpatterns = [
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-

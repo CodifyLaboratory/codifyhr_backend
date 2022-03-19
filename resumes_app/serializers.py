@@ -37,7 +37,6 @@ class ResumeSerializer(serializers.ModelSerializer):
                   'first_name',
                   'last_name',
                   'surname',
-                  'image',
                   'comment',
                   'phone_number',
                   'email',

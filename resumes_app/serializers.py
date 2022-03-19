@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from rest_framework.validators import UniqueTogetherValidator
 
 
 class CategorySerializers(serializers.ModelSerializer):
@@ -70,6 +71,15 @@ class WishlistCreateSerializer(serializers.ModelSerializer):
         model = Wishlist
         fields = ['id', 'user', 'wished_resume']
 
+    # def validate(self, data):
+    #     data = super().validate(data)
+    #     user = data['user']
+    #     wished_resume = data['wished_resume']
+    #
+    #     for instance in Wishlist.objects.filter(user=user):
+    #         if instance.wished_resume == wished_resume:
+    #             raise serializers.ValidationError(detail="Это резюме уже добавлено в закладку", code="Закладка создана")
+    #     return data
 
 class WishlistDetailSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(read_only=True)

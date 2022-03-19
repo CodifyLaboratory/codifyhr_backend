@@ -26,6 +26,7 @@ class Wishlist(models.Model):
     class Meta:
         verbose_name = 'Закладки'
         verbose_name_plural = 'Закладки'
+        unique_together = (('user', 'wished_resume'),)
 
     def __str__(self):
         return f"{self.user} {self.wished_resume}"
@@ -40,6 +41,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категории'
         verbose_name_plural = 'Категории'
+        unique_together = (('name',),)
 
 
 class Partners(models.Model):
@@ -53,3 +55,4 @@ class Partners(models.Model):
     class Meta:
         verbose_name = 'Партнеры'
         verbose_name_plural = 'Партнеры'
+        unique_together = (('title', 'link'),)

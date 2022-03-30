@@ -24,13 +24,8 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
 
-# CORS_ORIGIN_WHITELIST = [
-#     'http://185.219.43.45',
-#     "http://127.0.0.1",
-#     'http://nksgroup33.ru:8000'
-# ]
+CORS_ORIGIN_WHITELIST = ['*']
 
-# Application definition
 
 REST_FRAMEWORK = {
 

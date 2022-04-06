@@ -1,7 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
-from rest_framework.authentication import TokenAuthentication, BasicAuthentication, SessionAuthentication
 from rest_framework.exceptions import NotFound, AuthenticationFailed
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
@@ -12,7 +11,6 @@ from .serializers import *
 
 
 class ResumeReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
-    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     serializer_class = ResumeSerializer
@@ -23,7 +21,6 @@ class ResumeReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class WishlistModelViewSet(ModelViewSet):
-    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -67,4 +64,5 @@ class PartnerViewSet(viewsets.ViewSet):
         queryset = Partners.objects.all()
         serializer = PartnersSerializer(queryset, many=True)
         return Response(serializer.data)
+
 

@@ -4,8 +4,6 @@ from rest_framework.authtoken.admin import User
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .serializers import UserSerializer, UserDetailSerializer
-from rest_framework.authentication import TokenAuthentication, BasicAuthentication, SessionAuthentication
-from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.permissions import IsAuthenticated
 
 class UserRegisterAPIViews(views.APIView):
@@ -20,8 +18,6 @@ class UserRegisterAPIViews(views.APIView):
 
 
 class PersonalRoomViewSet(viewsets.ViewSet):
-
-    authentication_classes = [SessionAuthentication, BasicAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
     def retrieve(self, request, pk=None):
